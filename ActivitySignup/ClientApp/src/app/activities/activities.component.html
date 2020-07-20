@@ -1,0 +1,17 @@
+<div>
+  <div class="info"><fa-icon [icon]="infoIcon"></fa-icon> Add a new activity or click on an existing activity to see subscriptions.</div>
+</div>
+<table class="activities-table">
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let a of (activities | async); let i =index">
+      <td>{{i+1}}</td>
+      <td><a class="hyperlink" [routerLink]="[a.id]">{{a.title}}</a></td>
+    </tr>
+  </tbody>
+</table>

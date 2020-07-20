@@ -1,0 +1,11 @@
+<div class="header">
+  <div class="title">
+    Activity Signup</div>
+    <div class="spacer"></div>
+    <div class="actions">
+      <div class="action" *ngFor="let a of actions | async" (click)="a.func()">
+        <fa-icon [icon]="a.icon"></fa-icon>
+        {{a.title}}
+      </div>
+    </div>
+  </div>

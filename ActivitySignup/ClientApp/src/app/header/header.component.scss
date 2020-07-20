@@ -1,0 +1,26 @@
+$header-background: #3498db;
+$header-text-color: white;
+$action-hover-background:rgba(255,255,255,0.3);
+.header {
+  background-color: $header-background;
+  color: $header-text-color;
+  display: flex;
+  padding:0 5px;
+}
+.title{
+    padding:5px;
+}
+.actions {
+  display:flex;
+
+  & > .action {
+      display:flex;
+      align-items:center;
+      padding: 0 5px;
+    cursor: pointer;
+    transition:0.2s all;
+    &:hover {
+      background-color: $action-hover-background;
+    }
+  }
+}
