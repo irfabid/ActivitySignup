@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 $background-color: #ecf0f1 ;
-
+$row-border: 2px solid rgba(0,0,0,0.2);
 html, body {
   height: 100%;
 }
@@ -13,4 +13,22 @@ body {
 
 .spacer {
   flex-grow: 1;
+}
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+
+  & tr {
+    border-bottom: $row-border;
+  }
+
+  & th {
+    font-weight: bold;
+    color: gray;
+  }
+
+  & td,  & th {
+    padding: 5px;
+  }
 }

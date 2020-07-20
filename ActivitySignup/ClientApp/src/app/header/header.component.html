@@ -1,4 +1,7 @@
 <div class="header">
+  <div *ngIf="actionsSvc.showBack" style="display:flex;align-items:center;">
+    <fa-icon [icon]="backIcon" (click)="goBack()" ></fa-icon>
+  </div>
   <div class="title">
     Activity Signup</div>
     <div class="spacer"></div>

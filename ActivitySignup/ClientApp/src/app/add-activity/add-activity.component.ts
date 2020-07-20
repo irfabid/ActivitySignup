@@ -22,5 +22,6 @@ export class AddActivityComponent implements OnInit {
   saveActivity(): void {
     let act = new Activity(this.title.value);
     this.actSvc.saveActivity(act);
+    this.dialogRef.close();
   }
 }

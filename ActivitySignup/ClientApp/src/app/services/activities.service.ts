@@ -17,6 +17,9 @@ export class ActivitiesService {
   private _activityAdded: BehaviorSubject<Activity> = new BehaviorSubject<Activity>(undefined);
   public activityAdded: Observable<Activity> = this._activityAdded.asObservable();
 
+  private _currentActivity: BehaviorSubject<Activity> = new BehaviorSubject<Activity>(undefined);
+  public currentActivity: Observable<Activity> = this._currentActivity.asObservable();
+
   constructor(private _http: HttpClient) { }
 
   public refreshActivities(): void {
@@ -34,6 +37,11 @@ export class ActivitiesService {
   }
   public activityExists(title: string): Observable<boolean> {
     return this._http.get<boolean>(`${this._url}/exists/${title}`)
+  }
+  public loadActivity(id: number): void {
+    this._http.get<Activity>(`${this._url}/${id}`).toPromise()
+      .then(res => this._currentActivity.next(res))
+      .catch(err => console.error(err));
   }
 }
 export const activityAlreadyExistsAsyncValidator =

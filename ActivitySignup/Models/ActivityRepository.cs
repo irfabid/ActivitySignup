@@ -16,13 +16,23 @@ namespace ActivitySignup.Models
         {
             return _db.Activities.ToList();
         }
+        public Activity GetOne(int id)
+        {
+            return _db.Activities.FirstOrDefault(a => a.Id == id);
+        }
+        public IReadOnlyList<Subscription> GetSubscriptionsForActivity(int actId)
+        {
+            return _db.Subscriptions.Where(s => s.ActivityId == actId).ToList();
+        }
         public void SaveActivity(Activity act)
         {
-
+            _db.Activities.Add(act);
+            _db.SaveChanges();
         }
-        public void Subscribe(Subscription sub, Activity act)
+        public void Subscribe(Subscription sub)
         {
-
+            _db.Subscriptions.Add(sub);
+            _db.SaveChanges();
         }
         public void Unsubscribe(Subscription sub)
         {
@@ -31,6 +41,10 @@ namespace ActivitySignup.Models
         public bool ActivityExists(string title)
         {
             return _db.Activities.Any(a => a.Title == title);
+        }
+        public bool SubscriptionExists(int actId, string email)
+        {
+            return _db.Subscriptions.Any(s => s.ActivityId == actId && s.EmailAddress == email);
         }
     }
 }

@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Subscribe to {{activity.title}}</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName">
+      <mat-error>
+        First name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName">
+      <mat-error>
+        Last name is required
+      </mat-error>
+    </mat-form-field>
+     <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email">
+    <mat-error *ngIf="form.get('email').hasError('alreadySubscribed') && !form.get('email').hasError('required')">
+      This email is already subscribed to this activity
+    </mat-error>
+    <mat-error *ngIf="form.get('email').hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Comments (Optional)</mat-label>
+    <textarea matInput formControlName="comments" placeholder="optional"></textarea>
+  </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [disabled]="form.invalid" cdkFocusInitial (click)="addSubscription()">Subscribe</button>
+</mat-dialog-actions>

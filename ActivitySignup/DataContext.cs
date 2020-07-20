@@ -11,7 +11,7 @@ namespace ActivitySignup
     public class DataContext:DbContext
     {
         public DbSet<Activity> Activities { get; set; }
-
+        public DbSet<Subscription> Subscriptions { get; set; }
         public DataContext(DbContextOptions<DataContext> opts) : base(opts) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,7 +21,7 @@ namespace ActivitySignup
             builder.Entity<Activity>().HasKey(a => a.Id);
             builder.Entity<Activity>()
                 .HasMany(a => a.Subscriptions)
-                .WithOne(s => s.Activity);
+                .WithOne().HasForeignKey(s => s.ActivityId);
         }
     }
 }

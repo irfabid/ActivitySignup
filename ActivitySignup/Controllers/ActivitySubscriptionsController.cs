@@ -23,10 +23,23 @@ namespace ActivitySignup.Controllers
 
             return Ok();
         }
+        [HttpGet("{actId}")]
+        public IActionResult SubscriptionExists(int actId)
+        {
+            var subs = activityRepository.GetSubscriptionsForActivity(actId);
+            return Ok(subs);
+        }
+        [HttpGet("{actId}/exists/{email}")]
+        public IActionResult SubscriptionExists(int actId, string email)
+        {
+            var exists= activityRepository.SubscriptionExists(actId, email);
+            return Ok(exists);
+        }
         [HttpPost]
         public IActionResult Subscribe(Subscription sub)
         {
-            return Ok();
+            activityRepository.Subscribe(sub);
+            return Ok(sub);
         }
         [HttpDelete]
         public IActionResult Unsubscribe(Subscription sub)

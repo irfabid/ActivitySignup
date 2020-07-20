@@ -23,6 +23,14 @@ namespace ActivitySignup.Controllers
             var acts = activityRepository.GetAll();
             return Ok(acts);
         }
+        [HttpGet("{id}")]
+        public IActionResult GetActivity(int id)
+        {
+            var act = activityRepository.GetOne(id);
+            if (act == null)
+                return NotFound();
+            return Ok(act);
+        }
         [HttpGet("exists/{title}")]
         public IActionResult ActivityExists(string title)
         {
@@ -32,7 +40,12 @@ namespace ActivitySignup.Controllers
         [HttpPost]
         public IActionResult SaveActivity([FromBody]Activity act)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (activityRepository.ActivityExists(act.Title))
+                return BadRequest("Activity already exists.");
+            activityRepository.SaveActivity(act);
+            return Ok(act);
         }
     }
 }

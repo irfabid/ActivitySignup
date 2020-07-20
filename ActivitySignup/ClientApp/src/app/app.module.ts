@@ -18,6 +18,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { AddSubscriptionComponent } from './add-subscription/add-subscription.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SubscribeComponent,
     ActivityComponent,
     HeaderComponent,
-    AddActivityComponent
+    AddActivityComponent,
+    AddSubscriptionComponent
   ],
   imports: [
     HttpClientModule,
@@ -38,6 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatCardModule,
     ReactiveFormsModule
   ],
   providers: [ActivitiesService, HttpClient],

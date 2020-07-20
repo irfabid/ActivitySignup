@@ -7,6 +7,7 @@ import { Action } from '../models/action';
 import { faPlus, faInfo, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddActivityComponent } from '../add-activity/add-activity.component';
+import { SubscriptionsService } from '../services/subscriptions.service';
 @Component({
   selector: 'app-activities',
   templateUrl: './activities.component.html',
@@ -15,7 +16,7 @@ import { AddActivityComponent } from '../add-activity/add-activity.component';
 export class ActivitiesComponent implements OnInit {
   activities: Observable<Activity[]>;
   infoIcon: IconDefinition = faInfo;
-  constructor(private actSvc: ActivitiesService, private actionSvc: ActionsService, public dialog: MatDialog) {
+  constructor(private actSvc: ActivitiesService, private actionSvc: ActionsService, private subSvc:SubscriptionsService, public dialog: MatDialog) {
     this.activities = this.actSvc.activities;
     this.actSvc.refreshActivities();
     this.setActions();
@@ -31,6 +32,7 @@ export class ActivitiesComponent implements OnInit {
       func: this.showAddActivityDialog
     }];
     this.actionSvc.setActions(actions);
+    this.actionSvc.setBackAction(false);
   }
   showAddActivityDialog=()=> {
     
@@ -42,5 +44,8 @@ export class ActivitiesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+  subscribe(act: Activity): void {
+    this.subSvc.showAddSubscriptionDialog(act);
   }
 }
